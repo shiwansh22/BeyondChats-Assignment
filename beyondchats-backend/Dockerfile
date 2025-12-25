@@ -15,6 +15,14 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /var/www
 
+# Create SQLite database file
+RUN mkdir -p database \
+    && touch database/database.sqlite
+
+# Clear cached config just in case
+RUN php artisan config:clear
+
+
 # Copy project files
 COPY . .
 
